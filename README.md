@@ -1,4 +1,4 @@
-# date_range_picker
+# date_with_range_picker
 
 A customizable Flutter date range picker dialog widget with flexible styling and callbacks. Use this package to quickly add a dialog-based date range selector to your Flutter apps.
 
@@ -13,7 +13,7 @@ Add the package to your `pubspec.yaml` dependencies. When published to pub.dev u
 
 ```yaml
 dependencies:
-  date_range_picker: ^1.0.0
+  date_with_range_picker: ^1.0.8
 ```
 
 Then run:
@@ -26,7 +26,7 @@ flutter pub get
 Wrap the picker in a `showDialog` call and handle the `onSubmit` callback:
 
 ```dart
-import 'package:date_range_picker/date_range_picker.dart';
+import 'package:date_with_range_picker/date_with_range_picker.dart';
 import 'package:flutter/material.dart';
 
 showDialog<DateTimeRange>(

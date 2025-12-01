@@ -1,4 +1,4 @@
-name: date_range_picker
+name: date_with_range_picker
 description: "A customizable Flutter date range picker dialog widget with flexible styling and callbacks."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.

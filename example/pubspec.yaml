@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  date_range_picker:
+  date_with_range_picker:
     path: ../
 
 dev_dependencies:
