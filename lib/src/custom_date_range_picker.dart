@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+/// A customizable date range picker presented as a dialog.
+///
+/// Use this widget with `showDialog` to let users pick a start and end date.
+/// The [onSubmit] callback will be invoked with a non-null [DateTimeRange]
+/// when the user taps the submit button. The picker disallows selecting past
+/// dates (relative to `DateTime.now()`).
 class CustomDateRangePicker extends StatefulWidget {
   final Color primaryColor;
   final Function(DateTimeRange)? onSubmit;
@@ -272,17 +278,15 @@ class _RangeCalendar extends StatelessWidget {
                   start != null && DateUtils.isSameDay(date, start);
               bool isSelectedEnd =
                   end != null && DateUtils.isSameDay(date, end);
-              bool isIntermediate =
-                  start != null &&
+              bool isIntermediate = start != null &&
                   end != null &&
                   date.isAfter(start!) &&
                   date.isBefore(end!);
               bool isSelectedDay = isSelectedStart || isSelectedEnd;
               bool isInRange = isSelectedDay || isIntermediate;
 
-              Color backgroundColor = isInRange
-                  ? rangeHighlightColor
-                  : Colors.transparent;
+              Color backgroundColor =
+                  isInRange ? rangeHighlightColor : Colors.transparent;
               Color textColor = isPast
                   ? Colors.grey
                   : (isSelectedDay ? Colors.white : Colors.black87);
