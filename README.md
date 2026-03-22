@@ -4,7 +4,7 @@ A customizable Flutter date range picker dialog widget with flexible styling and
 
 ## Screenshot
 
-![Date Range Picker Screenshot](doc/screenshot.png)
+![Date Range Picker Screenshot](https://raw.githubusercontent.com/MontasirOpi/date_range_picker/main/doc/screenshot.png)
 
 ## Features
 

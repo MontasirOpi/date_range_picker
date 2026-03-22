@@ -1,3 +1,7 @@
+## [1.1.1] - 2026-03-22
+
+- Fix: README screenshot now uses absolute GitHub raw URL so it renders correctly on pub.dev.
+
 ## [1.1.0] - 2026-03-22
 
 - Added screenshot to README and pub.dev via `screenshots` in pubspec.yaml.
