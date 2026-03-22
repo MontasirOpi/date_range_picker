@@ -1,3 +1,9 @@
+## [1.1.0] - 2026-03-22
+
+- Added screenshot to README and pub.dev via `screenshots` in pubspec.yaml.
+- Updated README with full API parameter table and `showCustomDateRangePicker` usage.
+- Bumped to v1.1.0 (minor bump: new feature — single-date mode + screenshot).
+
 ## [1.0.9+1] - 2026-03-20
 
 - Added support for single date selection.

@@ -15,16 +15,11 @@ Future<DateTimeRange?> showCustomDateRangePicker(
   return showDialog<DateTimeRange>(
     context: context,
     builder: (context) {
-      return Dialog(
-        backgroundColor: Colors.white,
-        insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        child: CustomDateRangePicker(
-          isRange: isRange,
-          primaryColor: primaryColor,
-          initialMonth: initialMonth,
-          onSubmit: (range) => Navigator.pop(context, range),
-        ),
+      return CustomDateRangePicker(
+        isRange: isRange,
+        primaryColor: primaryColor,
+        initialMonth: initialMonth,
+        onSubmit: (range) => Navigator.pop(context, range),
       );
     },
   );
@@ -63,121 +58,127 @@ class _CustomDateRangePickerState extends State<CustomDateRangePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      width: 650,
-      height: 370,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 2,
-                child: _RangeCalendar(
-                  initialDay: _focusedMonth,
-                  start: start,
-                  end: end,
-                  isRange: widget.isRange,
-                  rangeHighlightColor: rangeHighlightColor,
-                  onDateChanged: _handleDateChanged,
-                  onMonthChanged: (newMonth) {
-                    setState(() {
-                      _focusedMonth = newMonth;
-                    });
-                  },
+    return Dialog(
+      backgroundColor: Colors.white,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        width: 650,
+        height: 370,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: _RangeCalendar(
+                    initialDay: _focusedMonth,
+                    start: start,
+                    end: end,
+                    isRange: widget.isRange,
+                    primaryColor: widget.primaryColor,
+                    rangeHighlightColor: rangeHighlightColor,
+                    onDateChanged: _handleDateChanged,
+                    onMonthChanged: (newMonth) {
+                      setState(() {
+                        _focusedMonth = newMonth;
+                      });
+                    },
+                  ),
                 ),
-              ),
-              const SizedBox(width: 20),
-              Expanded(
-                flex: 1,
-                child: SizedBox(
-                  height: 370,
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
-                              topRight: Radius.circular(12),
-                              bottomRight: Radius.circular(12),
-                            ),
-                            color: widget.primaryColor,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              // Adjust spacing based on mode
-                              SizedBox(height: widget.isRange ? 70 : 100),
-                              _dateInput(
-                                widget.isRange ? "From" : "Selected Date",
-                                start,
-                                widget.primaryColor,
+                const SizedBox(width: 20),
+                Expanded(
+                  flex: 1,
+                  child: SizedBox(
+                    height: 370,
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.only(
+                                topRight: Radius.circular(12),
+                                bottomRight: Radius.circular(12),
                               ),
-                              if (widget.isRange) ...[
-                                const SizedBox(height: 10),
+                              color: widget.primaryColor,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // Adjust spacing based on mode
+                                SizedBox(height: widget.isRange ? 70 : 100),
                                 _dateInput(
-                                  "To",
-                                  end,
+                                  widget.isRange ? "From" : "Selected Date",
+                                  start,
                                   widget.primaryColor,
                                 ),
-                              ],
-                              const SizedBox(height: 60),
-                              GestureDetector(
-                                onTap: _submitSelection,
-                                child: Container(
-                                  width: 125,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(3),
+                                if (widget.isRange) ...[
+                                  const SizedBox(height: 10),
+                                  _dateInput(
+                                    "To",
+                                    end,
+                                    widget.primaryColor,
                                   ),
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "SUBMIT",
-                                    style: TextStyle(
-                                      color: widget.primaryColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12,
+                                ],
+                                const SizedBox(height: 60),
+                                GestureDetector(
+                                  onTap: _submitSelection,
+                                  child: Container(
+                                    width: 125,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(3),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "SUBMIT",
+                                      style: TextStyle(
+                                        color: widget.primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        child: GestureDetector(
-                          onTap: () {
-                            // Ensure dialog closes correctly even if wrapped
-                            if (Navigator.canPop(context)) {
-                              Navigator.pop(context);
-                            }
-                          },
-                          child: const SizedBox(
-                            height: 40,
-                            width: 40,
-                            child: Icon(Icons.close,
-                                color: Colors.white, size: 20),
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child: GestureDetector(
+                            onTap: () {
+                              // Ensure dialog closes correctly even if wrapped
+                              if (Navigator.canPop(context)) {
+                                Navigator.pop(context);
+                              }
+                            },
+                            child: const SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: Icon(Icons.close,
+                                  color: Colors.white, size: 20),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -294,6 +295,7 @@ class _RangeCalendar extends StatelessWidget {
   final DateTime? start;
   final DateTime? end;
   final bool isRange;
+  final Color primaryColor;
   final Color rangeHighlightColor;
   final ValueChanged<DateTime> onDateChanged;
   final ValueChanged<DateTime> onMonthChanged;
@@ -303,6 +305,7 @@ class _RangeCalendar extends StatelessWidget {
     required this.start,
     required this.end,
     required this.isRange,
+    required this.primaryColor,
     required this.rangeHighlightColor,
     required this.onDateChanged,
     required this.onMonthChanged,
@@ -379,10 +382,20 @@ class _RangeCalendar extends StatelessWidget {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       color: backgroundColor, borderRadius: borderRadius),
-                  child: Text(
-                    dayOfMonth.toString(),
-                    style: TextStyle(
-                        color: textColor, fontWeight: FontWeight.w500),
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: isSelectedDay
+                        ? BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: primaryColor,
+                          )
+                        : null,
+                    child: Text(
+                      dayOfMonth.toString(),
+                      style: TextStyle(
+                          color: isSelectedDay ? Colors.white : textColor, 
+                          fontWeight: FontWeight.w500),
+                    ),
                   ),
                 ),
               );
